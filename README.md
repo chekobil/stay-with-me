@@ -1,16 +1,24 @@
-# Vue 3 + TypeScript + Vite
+# STAY-WITH-ME
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Clone the project from
 
-## Recommended IDE Setup
+```
+https://github.com/chekobil/stay-with-me
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+and run
 
-## Type Support For `.vue` Imports in TS
+```
+npm install
+```
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+### TO-DO list
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
-
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+- [x] create new Vite Vue3, TS, Pinia, Vue-Router
+- [x] create repo and connect
+- [] composable, para conectar a API https://jsonplaceholder.typicode.com/
+- [] CRUD options
+- [] Listado de Users con botón para mostrar toda la info / delete user
+- [] Explicacion escenario Offline
+- [] BONUS: boton y vista para añadir nuevo user
+- [] Subir a Netlify
