@@ -1,0 +1,26 @@
+{
+  "name": "stay-with-me",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.25"
+  },
+  "overrides": {
+    "esbuild": "npm:esbuild-wasm@latest"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "pinia": "^2.0.14",
+    "pug": "^3.0.2",
+    "sass": "^1.52.2",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9",
+    "vue-router": "^4.0.15",
+    "vue-tsc": "^0.34.7"
+  }
+}
