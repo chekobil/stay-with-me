@@ -30,6 +30,7 @@ const loading = ref<boolean>(true);
 const error = ref<string>("");
 const userList = ref<userType[]>([]);
 const userInfo = ref<userType | boolean>(false);
+const deletedRowIndex = ref<number[]>([]);
 
 const url = "https://jsonplaceholder.typicode.com/users";
 const getUsers = async (): Promise<userType[]> => {
@@ -48,19 +49,31 @@ const getUsers = async (): Promise<userType[]> => {
     return [];
   }
 };
-const deleteUser = async (id: number): Promise<void> => {
-  const res = await axios.delete(`${url}/${id}`);
+
+const tableRowClassName = ({
+  row,
+  rowIndex,
+}: {
+  row: userType;
+  rowIndex: number;
+}) => {
+  if (deletedRowIndex.value.includes(rowIndex)) {
+    return "danger-row";
+  }
+  return "";
+};
+
+const deleteUser = async (index: number, row: userType): Promise<void> => {
+  const res = await axios.delete(`${url}/${row.id}`);
   console.log(res);
   if (res.status === 200) {
-    console.log("DELETED USER", res.data);
-    //return res.data;
+    deletedRowIndex.value.push(index);
   }
 };
 
-const viewUserInfo = (id: number): void => {
-  const user = userList.value.find((user) => user.id === id);
-  console.log(user);
-  if (user) userInfo.value = user;
+const viewUserInfo = (index: number, row: userType): void => {
+  console.log(index, row);
+  if (row) userInfo.value = row;
   else userInfo.value = false;
 };
 
@@ -79,19 +92,15 @@ onMounted(async () => {
 .user-list(v-else-if='userList && userList.length')
   h3.title User list 
     small (showing {{ userList.length }} results)
-  .list
-    .user.titles
-      .username Username
-      .name Name
-      .email Email
-    template(v-for='user in userList')
-      .user
-        .username {{ user.username }}
-        .name {{ user.name }}
-        .email {{ user.email }}
-        .actions 
-          button(@click='viewUserInfo(user.id)') view 
-          button(@click='deleteUser(user.id)') delete
+  el-table(:data='userList', :row-class-name='tableRowClassName')
+    el-table-column(prop="username" label="Username")
+    el-table-column(prop="name" label="Name")
+    el-table-column(prop="email" label="Email")
+    el-table-column(label="Actions")
+      template(#default="scope")
+        el-button(size='small', @click='viewUserInfo(scope.$index, scope.row)') View
+        el-button(size='small', type='danger', @click='deleteUser(scope.$index, scope.row)') Delete
+
   .user-info(v-if='userInfo')
     h4 user Info
     button(@click='closeUserInfo') Close
@@ -104,6 +113,21 @@ onMounted(async () => {
 </template>
 
 <style lang="sass">
+
+.el-table .danger-row
+  --el-table-tr-bg-color: var(--el-color-danger-light-9)
+  .el-button
+    pointer-events: none
+    opacity: 0.3
+
+.el-table .warning-row
+  --el-table-tr-bg-color: var(--el-color-warning-light-9)
+
+.el-table .success-row
+  --el-table-tr-bg-color: var(--el-color-success-light-9)
+
+
+
 .user-list
   display: flex
   flex-direction: column
