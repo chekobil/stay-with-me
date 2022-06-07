@@ -64,10 +64,15 @@ const tableRowClassName = ({
 };
 
 const deleteUser = async (index: number, row: userType): Promise<void> => {
-  const res = await axios.delete(`${url}/${row.id}`);
-  console.log(res);
-  if (res.status === 200) {
-    deletedRowIndex.value.push(index);
+  try {
+    userInfo.value = false;
+    const res = await axios.delete(`${url}/${row.id}`);
+    console.log(res);
+    if (res.status === 200) {
+      deletedRowIndex.value.push(index);
+    }
+  } catch (err: any) {
+    console.log(err);
   }
 };
 
@@ -89,7 +94,7 @@ onMounted(async () => {
 <template lang="pug">
 .user-list(v-if='loading')
   h3.title Loading ...
-.user-list(v-else-if='userList && userList.length')
+.user-list(v-else-if='userList && userList.length', :class='{userInfoOpen: userInfo}')
   h3.title User list 
     small (showing {{ userList.length }} results)
   el-table(:data='userList', :row-class-name='tableRowClassName')
@@ -100,15 +105,15 @@ onMounted(async () => {
       template(#default="scope")
         el-button(size='small', @click='viewUserInfo(scope.$index, scope.row)') View
         el-button(size='small', type='danger', @click='deleteUser(scope.$index, scope.row)') Delete
-
-  .user-info(v-if='userInfo')
-    h4 user Info
-    button(@click='closeUserInfo') Close
-    pre {{ userInfo }}
 .user-list(v-else-if='error')
   h3.title Error: {{ error }}
 .user-list(v-else)
   h3.title No users
+
+.user-info(v-if='userInfo')
+  h3 User Info
+  pre {{ userInfo }}
+  el-button(@click='closeUserInfo') Close
 
 </template>
 
@@ -129,42 +134,29 @@ onMounted(async () => {
 
 
 .user-list
+  position: relative
   display: flex
   flex-direction: column
   justify-content: center
   align-items: flex-start
   //
   padding: 0
+  &.userInfoOpen
+    pointer-events: none
+    opacity: 0.4
   .title
     color: gray
     font-weight: 900
-  .list
-    padding: 0
-    width: 100%
-    list-style: none
-    .user:not(.titles) + .user
-      padding-top: 0.8rem
-      border-top: 1px solid gray
-    .user
-      padding: 0 1rem
-      margin-bottom: 0.8rem
-      //
-      display: grid
-      grid-template-columns: 2fr 3fr 4fr 1fr
-      &.titles
-        font-size: 0.8rem
-        border-bottom: 1px solid gray
-        color: gray
-        margin-bottom: 2rem
-
-      > div
-        text-align: left
-      .username
-
-      .name
-
-      .email
-      .actions
-        display: flex
-        flex-direction: row
+.user-info
+  padding: 2rem 1rem
+  position: fixed
+  z-index: 2
+  top: 3.4rem
+  left: 0
+  right: 0
+  margin: 0 auto
+  max-width: min(98vw, 700px)
+  border: 1px solid gray
+  border-radius: 0.5rem
+  background-color: rgb(255,255,255,0.88)
 </style>
