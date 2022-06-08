@@ -18,7 +18,10 @@ Utilizo Vite como bundler, con Vue3 + Typescript,
 escribo templates en PUG y estilos en SASS, utilizo composition API con la nomenclatura simplificada "script setup"
 Vue-router, muy básico, dos rutas, la ruta genérica redirecciona al listado de usuarios y desde el menú se puede acceder a la otra ruta para crear un nuevo usuario.
 Store gestionado con Pinia, para almacenar el listado de usuarios, de esta forma se llama a la API sólo en la primera carga del aplicación.
-No había usado nunca Element-Plus, uso el componente Table, Button y Menu.
+No había usado nunca Element-Plus, uso el componente Table, Button, Menu y Form.
+Los métodos que conectan con la API están implementados en un composable que exporta los distintos métodos del CRUD.
+Estos métodos gestionan la conexión, la respuesta y los posibles errores y responden de acuerdo al resultado
+Uso axios para las peticiones a la API (métodos get, delete y post).
 
 ## Escenario Offline
 
