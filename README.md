@@ -27,11 +27,10 @@ Si quisiera ir más allá y persisitir los datos incluso aunque el usuario haya 
 
 ### TO-DO list
 
-- [-] CRUD options, falta POST new user
-- [-] BONUS: boton y vista para añadir nuevo user
-- [] Subir a Netlify
 - [x] create new Vite Vue3, TS, Pinia, Vue-Router
 - [x] create repo and connect
 - [x] composable, para conectar a API https://jsonplaceholder.typicode.com/
 - [x] Listado de Users con botón para mostrar toda la info / delete user
+- [x] CRUD options, falta POST new user
 - [x] Explicacion escenario Offline
+- [x] BONUS: boton y vista para añadir nuevo user
