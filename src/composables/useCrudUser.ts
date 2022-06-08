@@ -74,8 +74,23 @@ export function useCrudUser() {
     return false;
   };
 
+  const createUser = async (url: string, data: userType): Promise<boolean> => {
+    try {
+      const res = await axios.post(url, data);
+      console.log("POST::", res);
+      if (res.status === 201) {
+        return true;
+      }
+    } catch (err: any) {
+      console.log(err);
+      return false;
+    }
+    return false;
+  };
+
   return {
     getUserList,
     deleteUser,
+    createUser,
   };
 }
