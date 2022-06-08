@@ -16,9 +16,9 @@ npm install
 
 - [x] create new Vite Vue3, TS, Pinia, Vue-Router
 - [x] create repo and connect
-- [] composable, para conectar a API https://jsonplaceholder.typicode.com/
-- [] CRUD options
-- [] Listado de Users con botón para mostrar toda la info / delete user
+- [x] composable, para conectar a API https://jsonplaceholder.typicode.com/
+- [-] CRUD options, falta POST new user
+- [x] Listado de Users con botón para mostrar toda la info / delete user
 - [] Explicacion escenario Offline
-- [] BONUS: boton y vista para añadir nuevo user
+- [-] BONUS: boton y vista para añadir nuevo user
 - [] Subir a Netlify
