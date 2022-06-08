@@ -22,7 +22,7 @@ No había usado nunca Element-Plus, uso el componente Table, Button y Menu.
 
 ## Escenario Offline
 
-He implementado un Store muy básico que almacena los datos de usuarios descargados y los mantiene mientras la aplicación siga funcionando, incluso aunque se pierda la conexión con la API, los datos de usuarios seguirían disponibles. En caso de querer manejar este escenario más a fondo, desactivaría las funcionalidades que hacen llamadas a la API, en este caso, desactivaría la opción de DELETE y CREATE (no está implementado) y el listado de usuarios se seguiría mostrando incluso aunque se navegue por la aplicación.
+He implementado un Store que almacena los datos de usuarios descargados y los mantiene mientras la aplicación siga funcionando, incluso aunque se pierda la conexión con la API, los datos de usuarios seguirían disponibles. En caso de querer manejar este escenario más a fondo, desactivaría las funcionalidades que hacen llamadas a la API, en este caso, desactivaría la opción de DELETE y CREATE (no está implementado) y el listado de usuarios se seguiría mostrando incluso aunque se navegue por la aplicación.
 Si quisiera ir más allá y persisitir los datos incluso aunque el usuario haya cerrado la aplicación, guardaría los datos descargados en el "storage" del navegador y gestionaría el acceso a datos de esta forma: si hay conexión con la API, descargo los datos y los almaceno tanto en el store como en el storage, si no hay conexión, los leo del storage y los almaceno en el store.
 
 ### TO-DO list
