@@ -1,11 +1,10 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import UserList from "./components/UserList.vue";
+import Nav from "./components/Nav.vue";
 </script>
 
-<template>
-  <UserList />
+<template lang="pug">
+Nav
+router-view
 </template>
 
 <style lang="sass">
