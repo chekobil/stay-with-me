@@ -29,6 +29,9 @@ interface responseUserType {
   error: string;
 }
 
+// los metodos que conectan con la API están todos aqui
+// son métodos que reciben la URL de la API como parámetro, por tanto son independientede la API y por eso mismo reutilizables.
+// la unica especie de "dependencia" es la nomenclatura en la que Element-Plus envía los datos de una fila (index, rowData), pero esto es trasladable a cualquier escenario
 export function useCrudUser() {
   const getUserList = async (url: string): Promise<responseUserType> => {
     try {

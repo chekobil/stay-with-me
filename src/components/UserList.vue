@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import axios from "axios";
 import { useUserStore } from "../store/User";
 import { useCrudUser } from "../composables/useCrudUser";
 import type { userType } from "../composables/useCrudUser";
@@ -8,10 +7,15 @@ import type { userType } from "../composables/useCrudUser";
 const userStore = useUserStore();
 const { getUserList, deleteUser } = useCrudUser();
 
+// muestro un mensaje mientras los datos se están cargando
 const loading = ref<boolean>(true);
+// los metodos CRUD, gestionan errores
 const error = ref<string>("");
+// lista de todos los usuarios
 const userList = ref<userType[]>([]);
+// la información completa de un solo usuario
 const userInfo = ref<userType | boolean>(false);
+// usuarios eliminados, se añade un estilo cuando un usuario ha sido eliminado y la API responde con exito
 const deletedRowIndex = ref<number[]>([]);
 
 const url = "https://jsonplaceholder.typicode.com/users";
@@ -33,7 +37,7 @@ const handleDeleteUser = async (
   index: number,
   row: userType
 ): Promise<void> => {
-  userInfo.value = false;
+  userInfo.value = false; // reset, por si está abierto el modal
   const res = await deleteUser(url, index, row);
   if (res) deletedRowIndex.value.push(index);
 };
@@ -49,6 +53,9 @@ const closeUserInfo = (): void => {
 };
 
 onMounted(async () => {
+  // cuando se monta el componente, se revisa si el Store tiene almacenado el listado de usuarios
+  // si lo tiene, se utiliza y no se vuelve a llamar a la API
+  // en la primera carga, el Store está vacío y los datos vienen se descargan de la API
   const savedUserList = userStore.getUserList;
   if (savedUserList && savedUserList.length) {
     // console.log("get data from Store");
@@ -58,9 +65,9 @@ onMounted(async () => {
     // console.log("get data from API");
     const { loading: l, data: d, error: e } = await getUserList(url);
     loading.value = l;
-    userStore.setUserList(d);
+    userStore.setUserList(d); // guarda el listado en el Store
     error.value = e;
-    userList.value = d;
+    userList.value = d; // guarda el listado en la variable que usa el template
   }
 });
 </script>
